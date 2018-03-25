@@ -1,0 +1,429 @@
+﻿Title: 'ISIT219 Assignment 2 - Part 2 : Rail Transport System Ontology'.
+Author: 'Jingwang Teh, Joshua Norris, Duong Nguyen, David Jordan Mele'.
+Namespace: 'http://ontorion.com/namespace'.
+
+
+Every rail-transport-system-component is a thing.
+Every infrastructure is a rail-transport-system-component.
+Every support-system is a rail-transport-system-component.
+Every entity is a rail-transport-system-component.
+Every vehicle is a rail-transport-system-component.
+Every physical-part is a rail-transport-system-component.
+
+Part-1: 'Infrastructure - Network'.
+
+Part-1-1: 'Network-element'.
+
+Every network-element is an infrastructure.
+
+Every network-node is a network-element.
+No network-node is a network-edge.
+Every network-edge is a network-element.
+No network-edge is a network-node.
+Something is a network-element if-and-only-if-it-either is a network-node or is a network-edge.
+
+Every network-edge must have-network-edge-safety-system nothing-but (some string value). 
+Every network-edge must have-network-edge-axle-load nothing-but (some real value). 
+Every network-edge must have-network-edge-loading-gauge nothing-but (some string value).
+Every network-edge must have-network-edge-speed nothing-but (some real value).
+Every network-edge must have-network-edge-current nothing-but (some real value).
+Every network-edge must have-network-edge-voltage nothing-but (some real value).
+
+Every network-node has-address-locality (some string value).
+Every network-node has-address-postal-code (some string value).
+Every network-node has-address-street-address (some string value).
+Every network-node has-address-x-coordinate (some real value).
+Every network-node has-address-y-coordinate (some real value).
+
+Part-1-1-1: 'Network-node'.
+
+Every line-node is a network-node.
+No line-node is a track-node.
+Every track-node is a network-node.
+No track-node is a line-node.
+Something is a network-node if-and-only-if-it-either is a line-node or is a track-node.
+
+Every depot is a line-node.
+Every train-station is a line-node.
+Every sub-station is a line-node.
+Something is a line-node if-and-only-if-it-either is a depot, is a train-station or is a sub-station.
+
+Every level-crossing is a track-node.
+Every signal is a track-node.
+Every switch-and-crossing is a track-node.
+Something is a track-node if-and-only-if-it-either is a level-crossing, is a signal or is a switch-and-crossing.
+
+Every line-node have-description (some string value).
+Every line-node must have-km-distance-from-city (some real value).
+Every line-node must have-current-status (some string value).
+Every line-node must have-open-date (some string value).
+Every line-node have-close-date (some string value).
+
+Part-1-1-1-Relation: 'Network-node'.
+
+Every line-node is-connected-to nothing-but line-edges.
+Every track-node is-connected-to nothing-but track-edges.
+
+Part-1-1-2: 'Network-edge'.
+
+Every line-edge is a network-edge.
+No line-edge is a track-edge.
+Every track-edge is a network-edge.
+No track-edge is a line-edge.
+Something is a network-edge if-and-only-if-it-either is a line-edge or is a track-edge.
+
+Every line-of-route is a line-edge.
+
+Every track is a track-edge.
+
+Part-1-1-2-Relation: 'Network-edge'.
+
+Every line-edge starts-at nothing-but line-node.
+Every line-edge ends-at nothing-but line-nodes.
+Every track-edge starts-at nothing-but track-nodes.
+Every track-edge ends-at nothing-but track-nodes.
+
+Every line-edge is-composed-of nothing-but track-edge.
+Every track-edge is-part-of nothing-but line-edge.
+
+Part-1-2: 'Network Line (e.g. South Coast Line)'.
+
+Every network-line is an infrastructure.
+Every network-line is-composed-of line-node.
+Every line-node is-part-of network-line.
+
+Every passenger-line is a network-line.
+Every freight-line is a network-line.
+Every coal-line is a network-line.
+Something is a network-line if-and-only-if-it-either is a passenger-line, is a freight-line or is a coal-line.
+
+
+Part-2: 'Entity'.
+
+Part-2-1: 'Person'.
+
+Every person is an entity.
+Something is a person if-and-only-if-it-either is a commuter or is a staff.
+
+Every person must have-person-age (some integer value).
+
+Part-2-1-1: 'Person - Commuter'.
+
+Every commuter is a person.
+No commuter is a staff.
+
+Part-2-1-2: 'Person - Staff'.
+
+Every staff is a person.
+No staff is a commuter.
+
+Every railway-staff is a staff.
+
+Every station-staff is a railway-staff.
+Every train-crew-staff is a railway-staff.
+Every train-operations-staff is a railway-staff.
+Every asset-management-staff is a railway-staff.
+Every corporate-staff is a railway-staff.
+Something is a railway-staff if-and-only-if-it-either is a station-staff, is a train-crew-staff, is a train-operations-staff, is an asset-management-staff or is a corporate-staff.
+
+Every retailer-staff is a staff.
+
+Part-2-2: 'Organization'.
+
+Every organization is an entity.
+
+Part-2-2-1: 'Rail-Organization'.
+
+Every rail-organization is an organization.
+
+Part-2-2-1-Relation: 'Rail-Organization'.
+
+Every railway-staff works-at nothing-but rail-organization.
+Every rail-organization hires-employee nothing-but railway-staff.
+Every rail-organization owns-network nothing-but network-line.
+
+Part-2-2-2: 'Retailer-Organization'.
+
+Every retailer-organization is an organization.
+
+Part-2-2-2-Relation: 'Retailer-Organization'.
+
+Every retailer-staff works-at nothing-but retailer-organization.
+Every retailer-organization hires-employee nothing-but retailer-staff.
+
+
+Part-3: 'Vehicles'.
+
+Every rolling-stock is a vehicle.
+
+Part-3-1: 'Rolling-Stock (Trains)'.
+
+Every rolling-stock-component is a physical-part.
+Every rolling-stock is-composed-of nothing-but rolling-stock-component.
+Every rolling-stock-component is-part-of nothing-but rolling-stock.
+
+Every trailer-driving-carriage is a rolling-stock-component.
+Every control-trailer-carriage is a rolling-stock-component.
+Every trailer-carriage is a rolling-stock-component.
+Every control-motor is a rolling-stock-component.
+Every motor-carriage is a rolling-stock-component.
+Every non-control-motor is a rolling-stock-component.
+Something is a rolling-stock-component if-and-only-if-it-either is a trailer-driving-carriage, is a control-trailer-carriage, is a trailer-carriage, is a control-motor, is a motor-carriage or is a non-control-motor.
+
+Every rolling-stock-component must have-vehicle-seating-capacity nothing-but (some integer value).
+Every rolling-stock-component must have-vehicle-weight nothing-but (some integer value).
+Every rolling-stock-component must have-vehicle-length nothing-but (some integer value).
+Every rolling-stock-component must have-vehicle-width nothing-but (some integer value).
+Every rolling-stock-component must have-vehicle-height nothing-but (some integer value).
+Every rolling-stock-component must have-vehicle-builder nothing-but (some string value).
+Every rolling-stock-component must have-vehicle-identifier nothing-but (some integer value).
+
+Part-3-1-Relation: 'Rolling-Stock'.
+
+Every rolling-stock runs-on nothing-but network-line.
+
+
+
+Part-4: 'System'.
+
+Every ticketing-system is a support-system.
+Every timetable-planning-system is a support-system.
+Every signaling-system is a support-system.
+Something is a support-system if-and-only-if-it-either is a ticketing-system, is a timetable-planning-system or is a signaling-system.
+
+Part-4-1: 'Ticketing System'.
+
+Every ticketing-system-component is a physical-part.
+Every ticketing-system-component is-part-of nothing-but ticketing-system.
+Every ticketing-system is-composed-of ticketing-system-component.
+
+Part-4-1-1: 'Ticket-card'.
+
+Every ticket-card is a ticketing-system-component.
+
+Every single-trip-card is a ticket-card.
+Every opal-card is a ticket-card.
+Something is a ticket-card if-and-only-if-it-either is a single-trip-card or is an opal-card.
+
+Every child-or-youth-single-trip-card is a single-trip-card.
+Every adult-single-trip-card is a single-trip-card.
+Something is a single-trip-card if-and-only-if-it-either is a child-or-youth-single-trip-card or is an adult-single-trip-card.
+
+Every child-or-youth-opal-card is an opal-card.
+Every school-opal-card is an opal-card.
+Every adult-opal-card is an opal-card.
+Every concession-opal-card is an opal-card.
+Every senior-opal-card is an opal-card.
+Every employee-opal-card is an opal-card.
+Something is an opal-card if-and-only-if-it-either is a child-or-youth-opal-card, is a school-opal-card, is an adult-opal-card, is a concession-opal-card, is a senior-opal-card or is an employee-opal-card.
+
+Every opal-card must have-card-id (some string value).
+Every opal-card must have-card-active-status (some boolean value).
+Every opal-card must have-card-owner-name (some string value).
+Every opal-card must have-card-balance (some real value).
+Every opal-card must have-card-start-trip-node (some string value).
+Every opal-card must have-card-start-trip-time (some datetime value).
+Every opal-card must have-card-used-in-week (some integer value).
+
+Part-4-1-2: 'Card-Reader'.
+
+Every card-reader is a ticketing-system-component.
+
+Part-4-1-3: 'Top-up machine'.
+
+Every ticket-machine is a ticketing-system-component.
+
+Part-4-1-Relation: 'Actors and Operations'.
+
+Every ticket-machine dispenses-ticket nothing-but single-trip-card.
+Every single-trip-card is-purchased-by nothing-but commuter.
+Every opal-card is-purchased-by nothing-but commuter.
+
+Every railway-staff has an employee-opal-card.
+Every commuter can have a child-or-youth-opal-card.
+Every commuter can have a school-opal-card.
+Every commuter can have an adult-opal-card.
+Every commuter can have a concession-opal-card.
+Every commuter can have a senior-opal-card.
+Every commuter can have a child-or-youth-single-trip-card.
+Every commuter can have an adult-single-trip-card.
+
+Every retailer-staff tops-up nothing-but opal-card.
+Every train-station has a card-reader.
+Every commuter taps-card-on nothing-but card-reader.
+Every commuter taps-card-off nothing-but card-reader.
+Every ticket-card can be-tapped-on a card-reader.
+Every ticket-card can be-tapped-off a card-reader.
+Every card-reader receive-card-tap-on nothing-but ticket-card.
+Every card-reader receive-card-tap-off nothing-but ticket-card.
+
+Every ticketing-system deduct-fare-from nothing-but opal-card.
+
+Part-4-2: 'Timetable-Planning System'.
+
+Every timetable-planning-system-component is a physical-part.
+Every timetable-planning-system-component is-part-of nothing-but timetable-planning-system.
+Every timetable-planning-system is-composed-of timetable-planning-system-component.
+
+Every timetable is a timetable-planning-system-component.
+Something is a timetable if-and-only-if-it-either is a station-timetable, is a train-timetable or is a network-line-timetable.
+
+Every timetable-unit is a timetable-planning-system-component.
+
+Part-4-2-1: 'Train-timetable'.
+
+Every train-timetable is a timetable.
+
+Part-4-2-2: 'Station-timetable'.
+
+Every station-timetable is a timetable.
+
+Part-4-2-3: 'Network-line-timetable'.
+
+Every network-line-timetable is a timetable.
+
+Part-4-2-4: 'Timetable-unit'.
+
+Every timetable-unit must have-train-departure-time (some datetime value).
+Every timetable-unit must have-source-station (some string value).
+Every timetable-unit must have-train-arrival-time (some datetime value).
+Every timetable-unit must have-destination-station (some string value).
+
+Part-4-2-Relation: 'Actors and Operations'.
+
+Every timetable-unit is-part-of nothing-but station-timetable.
+Every station-timetable is-composed-of timetable-unit.
+Every train-timetable is-composed-of station-timetable.
+Every network-line-timetable is-composed-of station-timetable.
+
+Every rolling-stock has-train-schedule nothing-but train-timetable.
+Every train-station has-station-timetable nothing-but station-timetable.
+
+Every station-timetable is-part-of nothing-but network-line-timetable.
+Every network-line-timetable is-composed-of station-timetable.
+
+Part-4-3: 'Signaling System'.
+
+Every signaling-system-component is a physical-part.
+Every signaling-system-component is-part-of nothing-but signaling-system.
+Every signaling-system is-composed-of signaling-system-component.
+
+Every signal-board is a signaling-system-component.
+Every color-light-signal is a signaling-system-component.
+Every signal-box is a signaling-system-component.
+Every cab-signaling is a signaling-system-component.
+
+Part-4-3-Relation: 'Actors and Operations'.
+
+Every signal-board provide-fixed-instructions-to train-crew-staff.
+Every color-light-signal provide-slow-down-sign-to train-crew-staff.
+Every color-light-signal provide-stopping-sign-to train-crew-staff.
+Every signal-box control-signals-for color-light-signal.
+Every signal-box provide-modified-route-to train-crew-staff.
+Every cab-signaling provide-operation-information-to train-crew-staff.
+
+
+
+Part-X: 'Instances'.
+
+Part-X-1: 'Organization'.
+
+Sydney-Trains is a rail-organization.
+Uni-Store is a retailer-organization.
+
+Part-X-2: 'Network Line'.
+
+Airport-Line is a passenger-line.
+Sydney-Trains owns-network nothing-but Airport-Line.
+
+Part-X-3: 'Network Nodes'.
+
+Central is a train-station that is-part-of Airport-Line and has-address-locality equal-to 'Sydney' and has-address-postal-code equal-to '2522' and has-address-street-address equal-to 'Central Street' and has-address-x-coordinate equal-to 151.2067 and has-address-y-coordinate equal-to -33.8828.
+Central have-description equal-to 'station at central' and have-km-distance-from-city equal-to 1.0 and have-current-status equal-to 'In Use' and have-open-date equal-to '26-Sep-1855'.
+
+Green-Square is a train-station that is-part-of Airport-Line and has-address-locality equal-to 'Sydney' and has-address-postal-code equal-to '2522' and has-address-street-address equal-to 'Green Square Street' and has-address-x-coordinate equal-to 151.2026 and has-address-y-coordinate equal-to -33.9061.
+Green-Square have-description equal-to 'station at green square' and have-km-distance-from-city equal-to 2.6 and have-current-status equal-to 'In Use' and have-open-date equal-to '21-May-2000'.
+
+Mascot is a train-station that is-part-of Airport-Line.
+Domestic-Terminal is a train-station that is-part-of Airport-Line.
+International-Terminal is a train-station that is-part-of Airport-Line.
+Wolli-Creek is a train-station that is-part-of Airport-Line.
+
+Part-X-4: 'Vehicle'.
+
+Waratah is a rolling-stock.
+Waratah-Carriage-158 is a trailer-driving-carriage that is-part-of nothing-but Waratah and have-vehicle-identifier nothing-but equal-to 158 and have-vehicle-builder nothing-but equal-to 'Reliance Rail' and have-vehicle-seating-capacity nothing-but equal-to 101 and have-vehicle-weight nothing-but equal-to 51 and have-vehicle-length nothing-but equal-to 20000 and have-vehicle-width nothing-but equal-to 3035 and have-vehicle-height nothing-but equal-to 4410.
+Waratah-Carriage-312 is a motor-carriage that is-part-of nothing-but Waratah and have-vehicle-identifier nothing-but equal-to 312 and have-vehicle-builder nothing-but equal-to 'Reliance Rail' and have-vehicle-seating-capacity nothing-but equal-to 118 and have-vehicle-weight nothing-but equal-to 51 and have-vehicle-length nothing-but equal-to 19393 and have-vehicle-width nothing-but equal-to 3035 and have-vehicle-height nothing-but equal-to 4410.
+Waratah-Carriage-156 is a trailer-carriage that is-part-of nothing-but Waratah and have-vehicle-identifier nothing-but equal-to 156 and have-vehicle-builder nothing-but equal-to 'Reliance Rail' and have-vehicle-seating-capacity nothing-but equal-to 110 and have-vehicle-weight nothing-but equal-to 48 and have-vehicle-length nothing-but equal-to 19482 and have-vehicle-width nothing-but equal-to 3035 and have-vehicle-height nothing-but equal-to 4410.
+
+Millennium is a rolling-stock.
+Millennium-Carriage-71 is a control-trailer-carriage that is-part-of nothing-but Millennium and have-vehicle-identifier nothing-but equal-to 71 and have-vehicle-builder nothing-but equal-to 'EDI Rail' and have-vehicle-seating-capacity nothing-but equal-to 104 and have-vehicle-weight nothing-but equal-to 49 and have-vehicle-length nothing-but equal-to 20532 and have-vehicle-width nothing-but equal-to 3030 and have-vehicle-height nothing-but equal-to 4381.
+Millennium-Carriage-70 is a non-control-motor that is-part-of nothing-but Millennium and have-vehicle-identifier nothing-but equal-to 70 and have-vehicle-builder nothing-but equal-to 'EDI Rail' and have-vehicle-seating-capacity nothing-but equal-to 122 and have-vehicle-weight nothing-but equal-to 54 and have-vehicle-length nothing-but equal-to 20243 and have-vehicle-width nothing-but equal-to 3030 and have-vehicle-height nothing-but equal-to 4381.
+
+C-Set is a rolling-stock.
+C-Set-Carriage-28 is a control-motor that is-part-of nothing-but C-Set and have-vehicle-identifier nothing-but equal-to 28 and have-vehicle-builder nothing-but equal-to 'Goninan' and have-vehicle-seating-capacity nothing-but equal-to 104 and have-vehicle-weight nothing-but equal-to 52 and have-vehicle-length nothing-but equal-to 20385 and have-vehicle-width nothing-but equal-to 3036 and have-vehicle-height nothing-but equal-to 4368.
+C-Set-Carriage-29 is a trailer-carriage that is-part-of nothing-but C-Set and have-vehicle-identifier nothing-but equal-to 29 and have-vehicle-builder nothing-but equal-to 'Goninan' and have-vehicle-seating-capacity nothing-but equal-to 115 and have-vehicle-weight nothing-but equal-to 43 and have-vehicle-length nothing-but equal-to 20385 and have-vehicle-width nothing-but equal-to 3036 and have-vehicle-height nothing-but equal-to 4368.
+
+Waratah runs-on nothing-but Airport-Line.
+Millennium runs-on nothing-but Airport-Line.
+C-Set runs-on nothing-but Airport-Line.
+
+Part-X-5: 'People'.
+
+John is a commuter that have-person-age equal-to 15.
+Joey is a commuter that have-person-age equal-to 40.
+
+Amy is a train-crew-staff that works-at nothing-but Sydney-Trains.
+Sydney-Trains hires-employee nothing-but Amy.
+Andrew is a train-crew-staff that works-at nothing-but Sydney-Trains.
+Sydney-Trains hires-employee nothing-but Andrew.
+James is a train-crew-staff that works-at nothing-but Sydney-Trains.
+Sydney-Trains hires-employee nothing-but James.
+Jason is a train-crew-staff that works-at nothing-but Sydney-Trains.
+Sydney-Trains hires-employee nothing-but Jason.
+May is a train-crew-staff that works-at nothing-but Sydney-Trains.
+Sydney-Trains hires-employee nothing-but May.
+
+John have Single-Trip-Card-1.
+Single-Trip-Card-1 is a child-or-youth-single-trip-card that is-purchased-by nothing-but John.
+Joey have Adult-Opal-Card-1.
+Adult-Opal-Card-1 is an adult-opal-card that is-purchased-by nothing-but Joey and have-card-id equal-to '1234567890' and have-card-owner-name equal-to 'Joey' and have-card-balance equal-to 100 and have-card-start-trip-node equal-to 'Central Station' and have-card-active-status equal-to true and have-card-start-trip-time equal-to 2017-05-28T12:00:00 and have-card-used-in-week equal-to 0.
+
+Aiden is a retailer-staff that works-at Uni-Store.
+Uni-Store hires-employee nothing-but Aiden.
+Aiden tops-up nothing-but Adult-Opal-Card-1.
+
+Card-Reader-1 is a card-reader.
+Card-Reader-2 is a card-reader.
+Central have Card-Reader-1.
+Green-Square have Card-Reader-2.
+
+Joey taps-card-on nothing-but Card-Reader-1.
+Joey taps-card-off nothing-but Card-Reader-2.
+Card-Reader-1 receive-card-tap-on nothing-but Adult-Opal-Card-1.
+Card-Reader-2 receive-card-tap-off nothing-but Adult-Opal-Card-1.
+
+Part-X-6: 'Timetable'.
+
+Station-Timetable-1 is a station-timetable.
+Central has-station-timetable nothing-but Station-Timetable-1.
+
+Station-Timetable-1 is-composed-of Timetable-Unit-1.
+Timetable-Unit-1 is a timetable-unit that is-part-of nothing-but Station-Timetable-1 and have-train-departure-time equal-to 2017-05-28T12:30:00 and have-source-station equal-to 'Central' and have-train-arrival-time equal-to 2017-05-28T12:40:00 and have-destination-station equal-to 'Green Square'.
+
+Timetable-Unit-2 is a timetable-unit.
+Timetable-Unit-3 is a timetable-unit.
+
+Part-X-7: 'Signalling'.
+
+Signal-Box-1 is a signal-box.
+Light-Signal-1 is a color-light-signal.
+Signal-Box-1 control-signals-for Light-Signal-1.
+
+Light-Signal-1 provide-slow-down-sign-to Amy.
+Signal-Box-1 provide-modified-route-to Amy.
+
+
+
+
+

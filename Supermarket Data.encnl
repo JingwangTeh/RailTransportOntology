@@ -1,0 +1,76 @@
+﻿Title: 'Supermarket Ontology'.
+Author: 'Jingwang Teh, Joshua Norris, Duong Nguyen, David Jordan Mele'.
+Namespace: 'http://ontorion.com/namespace'.
+
+Every supermarket is something.
+Every supermarket is-located-in a city.
+
+Every country is something.
+
+Every state-or-province is something.
+Every state-or-province is-part-of a country.
+
+Every city is something.
+Every city is-part-of a state-or-province.
+
+Every customer is something.
+Every customer must have-id nothing-but (some string value).
+Every customer must have-gender nothing-but (some string value).
+Every customer must have-marital-status nothing-but (some string value).
+Every customer must have-homeowner nothing-but (some boolean value).
+Every customer must have-children nothing-but (some integer value).
+Comment: 'MUST be a string as data cant be stored in any other form.'.
+Every customer must have-annual-income nothing-but (some string value).
+Every customer goes-to a supermarket.
+Every customer lives-in a city.
+
+Every product-category is something.
+
+Every product-department is something.
+Every product-department has-a a product-category.
+
+Every product-family is something.
+
+Every product is something.
+Every product has-a a product-department.
+Every product has-a a product-family.
+Every product cans-be-purchased-by a customer.
+
+Every transaction is something.
+Every transaction must have-purchase-date nothing-but (some datetime value).
+Every transaction must have-revenue nothing-but (some real value).
+Every transaction must have-units-sold nothing-but (some integer value).
+Every transaction has-a a product.
+Every transaction made-by a customer.
+
+
+Comment: 'Demonstration of working ontology using first row of data'.
+Comment: 'Create transaction'.
+Transaction-1 is a transaction and has-purchase-date equal-to 2012-12-18 and has-revenue equal-to 27.38 and has-units-sold equal-to 5.
+Comment: 'Create customer'.
+Customer-1 is a customer and has-id equal-to 7223 and has-gender equal-to 'F' and has-marital-status equal-to 'S' and has-homeowner equal-to true and has-children equal-to 2 and has-annual-income equal-to '$30K - $50K'.
+Comment: 'Link transaction to customer'.
+Transaction-1 made-by Customer-1.
+Comment: 'Create product'.
+Product-1 is a product.
+Comment: 'Create product-family and link to product'.
+Food is a product-family.
+Product-1 has-a Food.
+Comment: 'Create product-department (and product-category which is linked to the created product-department) and link to product'.
+Snack-Foods is a product-department.
+Snack-Foods-Cat is a product-category.
+Snack-Foods has-a Snack-Foods-Cat.
+Product-1 has-a Snack-Foods.
+Comment: 'Create a city (and associated entities) and link to customer'.
+Los-Angeles is a city.
+CA is a state-or-province.
+Los-Angeles is-part-of CA.
+USA is a country.
+CA is-part-of USA.
+Los-Angeles lives-in Los-Angeles.
+Comment: 'Create supermarket and link to previously created city'.
+Supermarket-1 is a supermarket.
+Supermarket-1 is-located-in Los-Angeles.
+
+
+
